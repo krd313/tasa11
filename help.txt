@@ -1,1 +1,3 @@
-php artisan make:model Project -fm (factory, migrate)
+php artisan make:model Project -fm      (factory, migrate)
+
+php artisan make:controller ProjectController --model=Project --requests --resource
