@@ -7,7 +7,7 @@ import {
 } from "@/constants.jsx";
 import { Link, router } from '@inertiajs/react';
 
-import TableHeading from "@/Components/TableHeaing";
+import TableHeading from "@/Components/TableHeading";
 export default function TasksTable({
     tasks,
     queryParams = null,
