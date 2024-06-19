@@ -1,10 +1,10 @@
 import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
-import TextAreaInput from "@/Components/TextAreaInput";
 import SelectInput from "@/Components/SelectInput";
+import TextAreaInput from "@/Components/TextAreaInput";
 import TextInput from "@/Components/TextInput";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, useForm, Link } from '@inertiajs/react';
+import { Head, Link, useForm } from "@inertiajs/react";
 
 export default function Create({ auth, user }) {
     const { data, setData, post, errors, reset } = useForm({
@@ -14,11 +14,12 @@ export default function Create({ auth, user }) {
         password_confirmation: "",
         _method: "PUT",
     });
+
     const onSubmit = (e) => {
         e.preventDefault();
 
-        post(route('user.update', user.id));
-    }
+        post(route("user.update", user.id));
+    };
 
     return (
         <AuthenticatedLayout
@@ -26,20 +27,20 @@ export default function Create({ auth, user }) {
             header={
                 <div className="flex justify-between items-center">
                     <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                        Edit User "{user.name}"
+                        Edit user "{user.name}"
                     </h2>
                 </div>
-            } >
-
+            }
+        >
             <Head title="Users" />
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-
-                        <form onSubmit={onSubmit}
-                            className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-
+                        <form
+                            onSubmit={onSubmit}
+                            className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg"
+                        >
                             <div className="mt-4">
                                 <InputLabel htmlFor="user_name" value="User Name" />
 
@@ -55,7 +56,6 @@ export default function Create({ auth, user }) {
 
                                 <InputError message={errors.name} className="mt-2" />
                             </div>
-
                             <div className="mt-4">
                                 <InputLabel htmlFor="user_email" value="User Email" />
 
@@ -86,9 +86,11 @@ export default function Create({ auth, user }) {
                                 <InputError message={errors.password} className="mt-2" />
                             </div>
 
-
                             <div className="mt-4">
-                                <InputLabel htmlFor="user_password_confirmation" value="Password Confirmation" />
+                                <InputLabel
+                                    htmlFor="user_password_confirmation"
+                                    value="Confirm Password"
+                                />
 
                                 <TextInput
                                     id="user_password_confirmation"
@@ -96,12 +98,16 @@ export default function Create({ auth, user }) {
                                     name="password_confirmation"
                                     value={data.password_confirmation}
                                     className="mt-1 block w-full"
-                                    onChange={(e) => setData("password_confirmation", e.target.value)}
+                                    onChange={(e) =>
+                                        setData("password_confirmation", e.target.value)
+                                    }
                                 />
 
-                                <InputError message={errors.password_confirmation} className="mt-2" />
+                                <InputError
+                                    message={errors.password_confirmation}
+                                    className="mt-2"
+                                />
                             </div>
-
                             <div className="mt-4 text-right">
                                 <Link
                                     href={route("user.index")}
@@ -114,15 +120,9 @@ export default function Create({ auth, user }) {
                                 </button>
                             </div>
                         </form>
-
-
                     </div>
                 </div>
             </div>
-
-
-
-
         </AuthenticatedLayout>
-    )
+    );
 }
